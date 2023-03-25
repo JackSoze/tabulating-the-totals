@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contribution Table</title>
+  <meta charset="UTF-8">
+  <style>
+    /* Style the table */
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    th {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contribution Table</h1>
+  <p>Paste the message in the textarea below:</p>
+  <form>
+    <textarea id="message" name="message" rows="10" cols="100"></textarea>
+    <br>
+    <button type="button" onclick="generateTable()">Generate Table</button>
+  </form>
+  <br>
+  <div id="tableContainer"></div>
+  
+  <script>
+    function generateTable() {
+      // Get the message from the textarea
+      var message = document.getElementById("message").value.trim();
+      
+      // Extract the names and amounts using regex
+      var data = message.matchAll(/(\d+\..+?)\s+(\d+(?:,\d+)*|\d+\.\d+)/g);
+      
+      // Create the table HTML
+      var tableHtml = "<table>";
+      tableHtml += "<tr><th>Names</th><th>Amount</th></tr>";
+      var total = 0;
+      for (var match of data) {
+        var name = match[1];
+        var amount = match[2].replace(",", "");
+        total += parseFloat(amount);
+        tableHtml += "<tr><td>" + name + "</td><td>" + amount + "</td></tr>";
+      }
+      tableHtml += "<tr><th>Total</th><td>" + total + "</td></tr>";
+      tableHtml += "</table>";
+      
+      // Set the table HTML in the table container
+      document.getElementById("tableContainer").innerHTML = tableHtml;
+    }
+  </script>
+</body>
+</html>
