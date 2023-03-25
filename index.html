@@ -42,7 +42,7 @@
       var message = document.getElementById("message").value.trim();
 
       // Extract the names and amounts using regex
-      var data = message.matchAll(/(\d+\..+?)\s*(\d+(?:,\d+)*|\d+\.\d+)/g);
+      var data = message.matchAll(/(\d+\..+?)\s+(\d+(?:,\d+)*|\d+\.\d+)/g);
 
       // Create the table HTML
       var tableHtml = "<table>";
